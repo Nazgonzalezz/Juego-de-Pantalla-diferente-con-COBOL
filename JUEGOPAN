@@ -1,0 +1,96 @@
+      ******************************************************************
+      * Author:GONZALEZ NAZARENA ARACELI
+      * Date:02/2024
+      * Purpose: Juego de pantalla diferente cobol
+      * Tectonics: cobc
+      ******************************************************************
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. JUEGOPAN.
+
+       DATA DIVISION.
+       FILE SECTION.
+
+       WORKING-STORAGE SECTION.
+       77  flag              PIC 9 VALUE 0.
+       77  opcion            PIC 9.
+       
+       01  indices.
+           05 i              PIC 9.
+           05 j              PIC 9.
+           
+       01  TITULO            PIC X(55) VALUE 
+           "DIRECCION   DER:1   IZQ: 2   ARRIB:3   ABAJ:4   SALIR:9".
+           
+       01  MAT OCCURS 10 TIMES.
+           05 MAT-IND OCCURS 30 TIMES PIC X VALUE SPACE.
+       
+       
+       PROCEDURE DIVISION.
+       MAIN-PROCEDURE.
+      */////////////////////////////////////////////////////////////////
+           PERFORM 1000-INICIALIZAR-MATRIZ
+           PERFORM 2000-MOSTRAR-MATRIZ
+           DISPLAY TITULO
+           ACCEPT opcion 
+           
+           PERFORM UNTIL opcion EQUAL 9 
+               EVALUATE opcion
+               WHEN 1
+                   PERFORM 2000-MOSTRAR-MATRIZ
+                   DISPLAY TITULO
+                   ACCEPT opcion 
+               WHEN 2
+                   PERFORM 2000-MOSTRAR-MATRIZ
+                   DISPLAY TITULO
+                   ACCEPT opcion
+               WHEN 3
+                   PERFORM 2000-MOSTRAR-MATRIZ
+                   DISPLAY TITULO
+                   ACCEPT opcion
+               WHEN 4
+                   PERFORM 2000-MOSTRAR-MATRIZ
+                   DISPLAY TITULO
+                   ACCEPT opcion
+               WHEN OTHER
+                   DISPLAY "ERROR"
+           END-PERFORM.
+           
+           STOP RUN.
+      */////////////////////////////////////////////////////////////////
+       
+       1000-INICIALIZAR-MATRIZ.
+           MOVE "[" TO MAT-IND(1,7)
+           MOVE "]" TO MAT-IND(1,7)
+           
+           MOVE "[" TO MAT-IND(4,4)
+           MOVE "]" TO MAT-IND(4,8)
+           
+           MOVE "[" TO MAT-IND(10,2)
+           MOVE "]" TO MAT-IND(10,5)
+            
+           MOVE 0 TO J
+           PERFORM VARYING j FROM 1 BY 1 UNTIL i > 30 
+               MOVE "*" TO MAT-IND(10,j)
+           END-PERFORM.
+             
+           MOVE 0 TO J
+           PERFORM VARYING j FROM 1 BY 1 UNTIL i > 30 
+               MOVE "*" TO MAT-IND(1,j)
+           END-PERFORM.
+               
+      *-----------------------------------------------------------------  
+       
+       2000-MOSTRAR-MATRIZ. 
+           MOVE 0 TO i 
+           MOVE 0 TO J 
+           
+           PERFORM VARYING i FROM 1 BY 1 UNTIL i > 10 
+               PERFORM VARYING j FROM 1 BY 1 UNTIL j > 30 
+                   DISPLAY MAT-IND(i,j)
+               END-PERFORM
+           END-PERFORM
+           
+           DISPLAY "FIN".
+           
+      *-----------------------------------------------------------------
+       END PROGRAM JUEGOPAN.
