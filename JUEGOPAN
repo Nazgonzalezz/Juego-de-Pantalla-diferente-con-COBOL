@@ -13,32 +13,33 @@
        WORKING-STORAGE SECTION.
        77  flag              PIC 9 VALUE 0.
        77  opcion            PIC 9.
-       
+
        01  indices.
-           05 i              PIC 9.
-           05 j              PIC 9.
-           
-       01  TITULO            PIC X(55) VALUE 
+           05 i              PIC 99.
+           05 j              PIC 99.
+
+       01  TITULO            PIC X(55) VALUE
            "DIRECCION   DER:1   IZQ: 2   ARRIB:3   ABAJ:4   SALIR:9".
            
-       01  MAT OCCURS 10 TIMES.
-           05 MAT-IND OCCURS 30 TIMES PIC X VALUE SPACE.
        
-       
+       01  MAT-1 OCCURS 30 TIMES.
+           05 MAT-2 OCCURS 80 TIMES.
+               10 MAT-IND  PIC X VALUE SPACE.
+
        PROCEDURE DIVISION.
        MAIN-PROCEDURE.
       */////////////////////////////////////////////////////////////////
            PERFORM 1000-INICIALIZAR-MATRIZ
            PERFORM 2000-MOSTRAR-MATRIZ
            DISPLAY TITULO
-           ACCEPT opcion 
-           
-           PERFORM UNTIL opcion EQUAL 9 
+           ACCEPT opcion
+
+           PERFORM UNTIL opcion EQUAL 9
                EVALUATE opcion
                WHEN 1
                    PERFORM 2000-MOSTRAR-MATRIZ
                    DISPLAY TITULO
-                   ACCEPT opcion 
+                   ACCEPT opcion
                WHEN 2
                    PERFORM 2000-MOSTRAR-MATRIZ
                    DISPLAY TITULO
@@ -54,43 +55,38 @@
                WHEN OTHER
                    DISPLAY "ERROR"
            END-PERFORM.
-           
+
            STOP RUN.
       */////////////////////////////////////////////////////////////////
-       
+
        1000-INICIALIZAR-MATRIZ.
-           MOVE "[" TO MAT-IND(1,7)
-           MOVE "]" TO MAT-IND(1,7)
-           
-           MOVE "[" TO MAT-IND(4,4)
-           MOVE "]" TO MAT-IND(4,8)
-           
-           MOVE "[" TO MAT-IND(10,2)
-           MOVE "]" TO MAT-IND(10,5)
-            
+           MOVE "[" TO MAT-IND(5,14)
+           MOVE "]" TO MAT-IND(5,60)
+
+           MOVE "[" TO MAT-IND(15,40)
+           MOVE "]" TO MAT-IND(15,70)
+
+           MOVE "[" TO MAT-IND(25,10)
+           MOVE "]" TO MAT-IND(25,40)
+
            MOVE 0 TO J
-           PERFORM VARYING j FROM 1 BY 1 UNTIL i > 30 
-               MOVE "*" TO MAT-IND(10,j)
-           END-PERFORM.
-             
-           MOVE 0 TO J
-           PERFORM VARYING j FROM 1 BY 1 UNTIL i > 30 
+           PERFORM VARYING J FROM 1 BY 1 UNTIL J > 80
                MOVE "*" TO MAT-IND(1,j)
-           END-PERFORM.
-               
-      *-----------------------------------------------------------------  
-       
-       2000-MOSTRAR-MATRIZ. 
-           MOVE 0 TO i 
-           MOVE 0 TO J 
-           
-           PERFORM VARYING i FROM 1 BY 1 UNTIL i > 10 
-               PERFORM VARYING j FROM 1 BY 1 UNTIL j > 30 
-                   DISPLAY MAT-IND(i,j)
-               END-PERFORM
            END-PERFORM
            
-           DISPLAY "FIN".
            
+           MOVE 0 TO J
+           PERFORM VARYING j FROM 1 BY 1 UNTIL J > 80
+               MOVE '*' TO MAT-IND(30,j)
+           END-PERFORM.
+
+      *-----------------------------------------------------------------
+
+       2000-MOSTRAR-MATRIZ.
+           MOVE 0 TO J
+           PERFORM VARYING J FROM 1 BY 1 UNTIL J > 30
+                DISPLAY MAT-1(j)
+           END-PERFORM.
+
       *-----------------------------------------------------------------
        END PROGRAM JUEGOPAN.
