@@ -71,6 +71,7 @@
                    ACCEPT opcion
                WHEN OTHER
                    DISPLAY "ERROR"
+                   MOVE 9 TO opcion
            END-PERFORM
 
            STOP RUN.
