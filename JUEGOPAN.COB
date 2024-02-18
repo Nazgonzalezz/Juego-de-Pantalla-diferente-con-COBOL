@@ -11,7 +11,6 @@
        FILE SECTION.
 
        WORKING-STORAGE SECTION.
-       77  flag              PIC 9 VALUE 0.
        77  opcion            PIC 9.
 
        01  indices.
@@ -86,8 +85,8 @@
 
            MOVE "]" TO MAT-IND(25,10)
            MOVE "[" TO MAT-IND(25,40)
-
-
+           
+           
            MOVE 2 TO EJEy
            MOVE 2 TO EJEx
            MOVE "X" TO MAT-IND(EJEy,EJEx)
@@ -120,41 +119,114 @@
        2200-MODIFICAR-MATRIZ.
            MOVE "X" TO MAT-IND(EJEy,EJEx)
            MOVE SPACE TO MAT-IND(VIEJOEJEy,VIEJOEJEx)
-           MOVE MOVIMIENTO TO ANTIGUO-LUGAR.
+           MOVE MOVIMIENTO TO ANTIGUO-LUGAR
+           
+           MOVE "]" TO MAT-IND(5,14)
+           MOVE "[" TO MAT-IND(5,60)
+
+           MOVE "]" TO MAT-IND(15,40)
+           MOVE "[" TO MAT-IND(15,70)
+
+           MOVE "]" TO MAT-IND(25,10)
+           MOVE "[" TO MAT-IND(25,40).
 
       *-----------------------------------------------------------------
 
        2300-VER-SI-LLEGA-AL-PARENT.
-           IF EJEy = 5 and EJEx = 13 and opcion = 1 THEN
+           IF EJEy = 5 and EJEx = 14 and opcion = 1 THEN
                MOVE 61 TO EJEx
                PERFORM 2200-MODIFICAR-MATRIZ
            END-IF
 
-           IF EJEy = 15 and EJEx = 39 and opcion = 1 THEN
+           IF EJEy = 15 and EJEx = 40 and opcion = 1 THEN
                MOVE 71 TO EJEx
                PERFORM 2200-MODIFICAR-MATRIZ
            END-IF
 
-           IF EJEy = 25 and EJEx = 9 and opcion = 1 THEN
+           IF EJEy = 25 and EJEx = 10 and opcion = 1 THEN
            MOVE 41 TO EJEx
                PERFORM 2200-MODIFICAR-MATRIZ
            END-IF
 
-            IF EJEy = 5 and EJEx = 61 and opcion = 2 THEN
+            IF EJEy = 5 and EJEx = 60 and opcion = 2 THEN
                MOVE 13 TO EJEx
                PERFORM 2200-MODIFICAR-MATRIZ
            END-IF
 
-           IF EJEy = 15 and EJEx = 71 and opcion = 2 THEN
+           IF EJEy = 15 and EJEx = 70 and opcion = 2 THEN
                MOVE 39 TO EJEx
                PERFORM 2200-MODIFICAR-MATRIZ
            END-IF
 
-           IF EJEy = 25 and EJEx = 41 and opcion = 2 THEN
-           MOVE 9 TO EJEx
+           IF EJEy = 25 and EJEx = 40 and opcion = 2 THEN
+               MOVE 9 TO EJEx
                PERFORM 2200-MODIFICAR-MATRIZ
            END-IF
-
+           
+      *-------------------------------     
+           IF EJEy = 5 AND EJEx = 14 AND opcion = 4 THEN
+               MOVE 6 to EJEy
+               PERFORM 2200-MODIFICAR-MATRIZ
+           END-IF
+           
+           IF EJEy = 5 AND EJEx = 14 AND opcion = 3 THEN
+               MOVE 4 to EJEy
+               PERFORM 2200-MODIFICAR-MATRIZ
+           END-IF
+      *-------------------------------     
+           IF EJEy = 5 AND EJEx = 60 AND opcion = 4 THEN
+               MOVE 6 to EJEy
+               PERFORM 2200-MODIFICAR-MATRIZ
+           END-IF
+           
+           IF EJEy = 5 AND EJEx = 60 AND opcion = 3 THEN
+               MOVE 4 to EJEy
+               PERFORM 2200-MODIFICAR-MATRIZ
+           END-IF
+      *-------------------------------     
+           IF EJEy = 15 AND EJEx = 40 AND opcion = 4 THEN
+               MOVE 16 to EJEy
+               PERFORM 2200-MODIFICAR-MATRIZ
+           END-IF
+           
+           IF EJEy = 15 AND EJEx = 40 AND opcion = 3 THEN
+               MOVE 14 to EJEy
+               PERFORM 2200-MODIFICAR-MATRIZ
+           END-IF
+      
+      *-------------------------------     
+           IF EJEy = 15 AND EJEx = 70 AND opcion = 4 THEN
+               MOVE 16 to EJEy
+               PERFORM 2200-MODIFICAR-MATRIZ
+           END-IF
+           
+           IF EJEy = 15 AND EJEx = 70 AND opcion = 3 THEN
+               MOVE 14 to EJEy
+               PERFORM 2200-MODIFICAR-MATRIZ
+           END-IF
+           
+      *-------------------------------     
+           IF EJEy = 25 AND EJEx = 10 AND opcion = 4 THEN
+               MOVE 26 to EJEy
+               PERFORM 2200-MODIFICAR-MATRIZ
+           END-IF
+           
+           IF EJEy = 25 AND EJEx = 10 AND opcion = 3 THEN
+               MOVE 24 to EJEy
+               PERFORM 2200-MODIFICAR-MATRIZ
+           END-IF
+           
+      *-------------------------------     
+           IF EJEy = 25 AND EJEx = 40 AND opcion = 4 THEN
+               MOVE 26 to EJEy
+               PERFORM 2200-MODIFICAR-MATRIZ
+           END-IF
+           
+           IF EJEy = 25 AND EJEx = 40 AND opcion = 3 THEN
+               MOVE 24 to EJEy
+               PERFORM 2200-MODIFICAR-MATRIZ
+           END-IF
+      *-------------------------------- 
            PERFORM 2000-MOSTRAR-MATRIZ.
 
       *-----------------------------------------------------------------
