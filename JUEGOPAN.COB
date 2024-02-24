@@ -41,7 +41,7 @@
            PERFORM 2000-MOSTRAR-MATRIZ
            DISPLAY TITULO
            ACCEPT opcion
-      *UPPER es la funcion para convertir a mayusculas, pero no me funciona  
+      *UPPER es la funcion para convertir a mayusculas, pero no me funciona
            PERFORM UNTIL opcion EQUAL "9"
                EVALUATE opcion
                WHEN "D"
@@ -122,46 +122,44 @@
       *-----------------------------------------------------------------
 
        2300-VER-SI-LLEGA-AL-PARENT.
-           
            EVALUATE EJEy
            WHEN 5
-               IF EJEx = 14
+               EVALUATE EJEx
+               WHEN 14
                    IF opcion equal "D"
                        MOVE 61 TO EJEx
                        PERFORM 2200-MODIFICAR-MATRIZ
-                   ELSE 
+                   ELSE
                       IF opcion equal "A"
                           MOVE 13 TO EJEx
                            PERFORM 2200-MODIFICAR-MATRIZ
-                        ELSE 
+                        ELSE
                           IF  opcion equal "W"
                                MOVE 4 TO EJEy
                                PERFORM 2200-MODIFICAR-MATRIZ
-                           ELSE 
+                           ELSE
                                IF OPCION EQUAL "S"
                                    MOVE 6 TO EJEy
                                    PERFORM 2200-MODIFICAR-MATRIZ
-                                   
+
                                END-IF
                            END-IF
                        END-IF
                    END-IF
                    MOVE "]" TO MAT-IND(5,14)
-               END-IF
-               
-               IF EJEx = 60
+               WHEN 60
                    IF opcion equal "D"
                        MOVE 61 TO EJEx
                        PERFORM 2200-MODIFICAR-MATRIZ
-                   ELSE 
+                   ELSE
                       IF opcion equal "A"
                           MOVE 13 TO EJEx
                            PERFORM 2200-MODIFICAR-MATRIZ
-                        ELSE 
+                        ELSE
                           IF  opcion equal "W"
                                MOVE 4 TO EJEy
                                PERFORM 2200-MODIFICAR-MATRIZ
-                           ELSE 
+                           ELSE
                                IF OPCION EQUAL "S"
                                    MOVE 6 TO EJEy
                                    PERFORM 2200-MODIFICAR-MATRIZ
@@ -170,103 +168,101 @@
                        END-IF
                    END-IF
                    MOVE "[" TO MAT-IND(5,60)
-               END-IF
+               END-EVALUATE
            WHEN 15
-               IF EJEx = 40
+               EVALUATE EJEx
+               WHEN 40
                    IF opcion equal "D"
                        MOVE 71 TO EJEx
                        PERFORM 2200-MODIFICAR-MATRIZ
-                   ELSE 
+                   ELSE
                       IF opcion equal "A"
                           MOVE 15 TO EJEx
                            PERFORM 2200-MODIFICAR-MATRIZ
-                        ELSE 
+                        ELSE
                           IF  opcion equal "W"
                                MOVE 14 TO EJEy
                                PERFORM 2200-MODIFICAR-MATRIZ
-                           ELSE 
+                           ELSE
                                IF OPCION EQUAL "S"
                                    MOVE 16 TO EJEy
                                    PERFORM 2200-MODIFICAR-MATRIZ
-                                   
+
                                END-IF
                            END-IF
                        END-IF
                    END-IF
                    MOVE "]" TO MAT-IND(15,40)
-               END-IF
-          
-               IF EJEx = 70
+               WHEN 70
                    IF opcion equal "D"
                        MOVE 71 TO EJEx
                        PERFORM 2200-MODIFICAR-MATRIZ
-                   ELSE 
+                   ELSE
                       IF opcion equal "A"
                           MOVE 39 TO EJEx
                            PERFORM 2200-MODIFICAR-MATRIZ
-                        ELSE 
+                        ELSE
                           IF  opcion equal "W"
                                MOVE 14 TO EJEy
                                PERFORM 2200-MODIFICAR-MATRIZ
-                           ELSE 
+                           ELSE
                                IF OPCION EQUAL "S"
                                    MOVE 16 TO EJEy
                                    PERFORM 2200-MODIFICAR-MATRIZ
-                                   
+
                                END-IF
                            END-IF
                        END-IF
                    END-IF
                    MOVE "[" TO MAT-IND(15,70)
-               END-IF
+               END-EVALUATE
            WHEN 25
-               IF EJEx = 10
+               EVALUATE EJEx
+               WHEN 10
                    IF opcion equal "D"
                        MOVE 41 TO EJEx
                        PERFORM 2200-MODIFICAR-MATRIZ
-                   ELSE 
+                   ELSE
                       IF opcion equal "A"
                           MOVE 9 TO EJEx
                            PERFORM 2200-MODIFICAR-MATRIZ
-                        ELSE 
+                        ELSE
                           IF  opcion equal "W"
                                MOVE 24 TO EJEy
                                PERFORM 2200-MODIFICAR-MATRIZ
-                           ELSE 
+                           ELSE
                                IF OPCION EQUAL "S"
                                    MOVE 26 TO EJEy
                                    PERFORM 2200-MODIFICAR-MATRIZ
-                                   
+
                                END-IF
                            END-IF
                        END-IF
                    END-IF
                    MOVE "]" TO MAT-IND(25,10)
-               END-IF
-           
-               IF EJEx = 40
+               WHEN 40
                    IF opcion equal "D"
                        MOVE 41 TO EJEx
                        PERFORM 2200-MODIFICAR-MATRIZ
-                   ELSE 
+                   ELSE
                       IF opcion equal "A"
                           MOVE 9 TO EJEx
                            PERFORM 2200-MODIFICAR-MATRIZ
-                        ELSE 
+                        ELSE
                           IF  opcion equal "W"
                                MOVE 24 TO EJEy
                                PERFORM 2200-MODIFICAR-MATRIZ
-                           ELSE 
+                           ELSE
                                IF OPCION EQUAL "S"
                                    MOVE 26 TO EJEy
                                    PERFORM 2200-MODIFICAR-MATRIZ
-                                   
+
                                END-IF
                            END-IF
                        END-IF
                    END-IF
                    MOVE "[" TO MAT-IND(25,40)
-               END-IF
+               END-EVALUATE
            END-EVALUATE
            
            PERFORM 2000-MOSTRAR-MATRIZ.
