@@ -18,7 +18,7 @@
            05 j              PIC 99.
 
        01  TITULO            PIC X(55) VALUE
-           "DIRECCION   DER:A   IZQ:D   ARRIB:W   ABAJ:S   SALIR:9".
+           "DIRECCION   DER:D   IZQ:A   ARRIB:W   ABAJ:S   SALIR:9".
 
 
        01  MAT-1 OCCURS 30 TIMES.
@@ -141,7 +141,6 @@
                                IF OPCION EQUAL "S"
                                    MOVE 6 TO EJEy
                                    PERFORM 2200-MODIFICAR-MATRIZ
-
                                END-IF
                            END-IF
                        END-IF
@@ -187,7 +186,6 @@
                                IF OPCION EQUAL "S"
                                    MOVE 16 TO EJEy
                                    PERFORM 2200-MODIFICAR-MATRIZ
-
                                END-IF
                            END-IF
                        END-IF
@@ -209,7 +207,6 @@
                                IF OPCION EQUAL "S"
                                    MOVE 16 TO EJEy
                                    PERFORM 2200-MODIFICAR-MATRIZ
-
                                END-IF
                            END-IF
                        END-IF
@@ -234,7 +231,6 @@
                                IF OPCION EQUAL "S"
                                    MOVE 26 TO EJEy
                                    PERFORM 2200-MODIFICAR-MATRIZ
-
                                END-IF
                            END-IF
                        END-IF
@@ -256,7 +252,6 @@
                                IF OPCION EQUAL "S"
                                    MOVE 26 TO EJEy
                                    PERFORM 2200-MODIFICAR-MATRIZ
-
                                END-IF
                            END-IF
                        END-IF
