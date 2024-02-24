@@ -39,42 +39,35 @@
        MAIN-PROCEDURE.
            PERFORM 1000-INICIALIZAR-MAPA
            PERFORM 2000-MOSTRAR-MAPA
-           DISPLAY TITULO
-           ACCEPT opcion
-      *UPPER es la funcion para convertir a mayusculas, pero no me funciona
+           PERFORM 3000-RECIBIR-MOVIMIENTO
+           
            PERFORM UNTIL opcion EQUAL "9"
                EVALUATE opcion
                WHEN "D"
                    COMPUTE EJEx = EJEx + 1
                    PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
                    PERFORM 5000-TRASPASAR-PUERTA
-                   DISPLAY TITULO
-                   ACCEPT opcion
+                   PERFORM 3000-RECIBIR-MOVIMIENTO
                WHEN "A"
                    COMPUTE EJEx = EJEx - 1
                    PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
                    PERFORM 5000-TRASPASAR-PUERTA
-                   DISPLAY TITULO
-                   ACCEPT opcion
+                   PERFORM 3000-RECIBIR-MOVIMIENTO
                WHEN "W"
                    COMPUTE EJEy = EJEy -  1
                    PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
                    PERFORM 5000-TRASPASAR-PUERTA
-                   DISPLAY TITULO
-                   ACCEPT opcion
+                   PERFORM 3000-RECIBIR-MOVIMIENTO
                WHEN "S"
                    COMPUTE EJEy = EJEy +  1
                    PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
                    PERFORM 5000-TRASPASAR-PUERTA
-                   DISPLAY TITULO
-                   ACCEPT opcion
+                   PERFORM 3000-RECIBIR-MOVIMIENTO
                WHEN OTHER
                    PERFORM 2000-MOSTRAR-MAPA
-                   DISPLAY TITULO
-                   ACCEPT opcion
+                   PERFORM 3000-RECIBIR-MOVIMIENTO
                END-EVALUATE
            END-PERFORM
-
            STOP RUN.
       */////////////////////////////////////////////////////////////////
 
@@ -112,6 +105,22 @@
            PERFORM VARYING J FROM 1 BY 1 UNTIL J > 30
                 DISPLAY MAT-1(j)
            END-PERFORM.
+               
+      *-----------------------------------------------------------------         
+
+       3000-RECIBIR-MOVIMIENTO.
+           DISPLAY TITULO
+           ACCEPT opcion
+           EVALUATE opcion
+               WHEN "a"
+                   MOVE "A"             TO opcion
+               WHEN "s"
+                    MOVE "S"            TO opcion
+               WHEN "d"
+                    MOVE "D"            TO opcion
+               WHEN "w"
+                    MOVE "W"            TO opcion
+           END-EVALUATE.
 
       *-----------------------------------------------------------------
 
