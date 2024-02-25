@@ -44,31 +44,53 @@
            PERFORM UNTIL opcion EQUAL "9"
                EVALUATE opcion
                WHEN "D"
-                   COMPUTE EJEx = EJEx + 1
-                   PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
-                   PERFORM 5000-TRASPASAR-PUERTA
-                   PERFORM 3000-RECIBIR-MOVIMIENTO
+                   IF EJEX NOT EQUAL 80
+                       COMPUTE EJEx = EJEx + 1
+                       PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
+                       PERFORM 5000-TRASPASAR-PUERTA
+                       PERFORM 3000-RECIBIR-MOVIMIENTO
+                   ELSE
+                       MOVE 1 TO EJEx
+                       PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
+                       PERFORM 5000-TRASPASAR-PUERTA
+                       PERFORM 3000-RECIBIR-MOVIMIENTO
+                  END-IF
                WHEN "A"
-                   COMPUTE EJEx = EJEx - 1
-                   PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
-                   PERFORM 5000-TRASPASAR-PUERTA
-                   PERFORM 3000-RECIBIR-MOVIMIENTO
+                   IF EJEX NOT EQUAL 1
+                       COMPUTE EJEx = EJEx - 1
+                       PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
+                       PERFORM 5000-TRASPASAR-PUERTA
+                       PERFORM 3000-RECIBIR-MOVIMIENTO
+                   ELSE
+                       MOVE 80 TO EJEx
+                       PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
+                       PERFORM 5000-TRASPASAR-PUERTA
+                       PERFORM 3000-RECIBIR-MOVIMIENTO
+                   END-IF
                WHEN "W"
-                   COMPUTE EJEy = EJEy -  1
-                   PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
-                   PERFORM 5000-TRASPASAR-PUERTA
-                   PERFORM 3000-RECIBIR-MOVIMIENTO
+                   IF EJEy NOT EQUAL 2
+                       COMPUTE EJEy = EJEy -  1
+                       PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
+                       PERFORM 5000-TRASPASAR-PUERTA
+                       PERFORM 3000-RECIBIR-MOVIMIENTO
+                   ELSE
+                       PERFORM 6000-DEJAR-PERSONAJE-QUIETO
+                   END-IF
                WHEN "S"
-                   COMPUTE EJEy = EJEy +  1
-                   PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
-                   PERFORM 5000-TRASPASAR-PUERTA
-                   PERFORM 3000-RECIBIR-MOVIMIENTO
+                   IF EJEy NOT EQUAL 29
+                       COMPUTE EJEy = EJEy +  1
+                       PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
+                       PERFORM 5000-TRASPASAR-PUERTA
+                       PERFORM 3000-RECIBIR-MOVIMIENTO
+                   ELSE 
+                       PERFORM 6000-DEJAR-PERSONAJE-QUIETO
+                   END-IF
                WHEN OTHER
-                   PERFORM 2000-MOSTRAR-MAPA
-                   PERFORM 3000-RECIBIR-MOVIMIENTO
+                   PERFORM 6000-DEJAR-PERSONAJE-QUIETO
                END-EVALUATE
            END-PERFORM
            STOP RUN.
+           
       */////////////////////////////////////////////////////////////////
 
        1000-INICIALIZAR-MAPA.
@@ -88,16 +110,6 @@
            MOVE 2 TO VIEJOEJEy
            MOVE 3 TO VIEJOEJEx
 
-           MOVE 0 TO J
-           PERFORM VARYING J FROM 1 BY 1 UNTIL J > 30
-               MOVE "*" TO MAT-IND(j,1)
-           END-PERFORM
-           
-           MOVE 0 TO J
-           PERFORM VARYING J FROM 1 BY 1 UNTIL J > 30
-               MOVE "*" TO MAT-IND(j,80)
-           END-PERFORM
-           
            MOVE 0 TO J
            PERFORM VARYING J FROM 1 BY 1 UNTIL J > 80
                MOVE "*" TO MAT-IND(1,j)
@@ -138,7 +150,7 @@
            MOVE "X" TO MAT-IND(EJEy,EJEx)
            MOVE SPACE TO MAT-IND(VIEJOEJEy,VIEJOEJEx)
            MOVE MOVIMIENTO TO ANTIGUO-LUGAR.
-         
+
       *-----------------------------------------------------------------
 
        5000-TRASPASAR-PUERTA.
@@ -157,7 +169,7 @@
                        MOVE 4 TO EJEy
                        PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
                    WHEN "S"
-                       MOVE 6 TO EJEy                        
+                       MOVE 6 TO EJEy
                        PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
                    END-EVALUATE
                    MOVE "]" TO MAT-IND(5,14)
@@ -181,7 +193,7 @@
            WHEN 15
                EVALUATE EJEx
                WHEN 40
-                   EVALUATE opcion 
+                   EVALUATE opcion
                    WHEN "D"
                        MOVE 71 TO EJEx
                        PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
@@ -251,10 +263,12 @@
            END-EVALUATE
 
            PERFORM 2000-MOSTRAR-MAPA.
-           
+
       *-----------------------------------------------------------------
-       
-       6000-CONTROLAR-MOVIMIENTO.
+
+       6000-DEJAR-PERSONAJE-QUIETO.
+           PERFORM 2000-MOSTRAR-MAPA
+           PERFORM 3000-RECIBIR-MOVIMIENTO.
            
       *-----------------------------------------------------------------
        END PROGRAM JUEGOPAN.
