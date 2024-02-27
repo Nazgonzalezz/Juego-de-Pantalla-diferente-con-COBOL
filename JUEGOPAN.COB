@@ -356,8 +356,7 @@
 
        6000-DEJAR-PERSONAJE-QUIETO.
            PERFORM 2000-MOSTRAR-MAPA
-           IF opcion not equal "9"
-               ADD 1 TO WS-PUNTAJE
+           IF opcion not equal "9" 
                PERFORM 3000-RECIBIR-MOVIMIENTO
            END-IF.
 
