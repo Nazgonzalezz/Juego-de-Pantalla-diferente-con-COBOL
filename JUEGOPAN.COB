@@ -49,7 +49,9 @@
            05 FILLER               PIC XX VALUE SPACES.
            05 FILLER               PIC X(9) VALUE 'JUEGO PAN'.
            05 FILLER               PIC XX VALUE SPACES.
-           05 FILLER               PIC X(50) VALUE ALL '*'.
+           05 FILLER               PIC X(20) VALUE ALL '*'.
+           05 WS-H-MENSAJE         PIC X(10) VALUE ALL '*'.
+           05 FILLER               PIC X(20) VALUE ALL '*'.
            05 FILLER               PIC XX VALUE SPACES.
            05 FILLER               PIC X(8) VALUE 'PUNTAJE:'.
            05 WS-PUNTAJE           PIC 999.
@@ -365,11 +367,13 @@
       *CADA MOVIMIENTO. CUANDO LLEGUE A SCORE: 10 APARECERA EL ENEMIGO.
 
        7000-VERIFICAR-SCORE.
+           PERFORM 9200-GENERAR-MENSAJE
            IF WS-PUNTAJE = 10 THEN
               MOVE 78 TO ENEMY-EJEx
               MOVE 29 TO ENEMY-EJEy
               MOVE "E" TO MAT-IND(ENEMY-EJEy,ENEMY-EJEx)
-           ELSE IF WS-PUNTAJE >= 150 THEN
+           END-IF
+           IF WS-PUNTAJE >= 100 THEN
                PERFORM 9999-GAME-OVER
            END-IF.
 
@@ -445,8 +449,7 @@
                    SUBTRACT 1 FROM ENEMY-EJEy
                END-IF
            END-IF
-      *AQUI VERIFICAMOS SI GANO O PERDIO DEPENDIENDO SI EL ENEMIGO LO
-      *ALCANZO O LLEGAMOS AL PUNTAJE DE 150.
+      *AQUI VERIFICAMOS SI EL ENEMIGO ALCANZO AL JUGADOR, PERDERA
            IF EJEX = ENEMY-EJEx AND EJEy = ENEMY-EJEy THEN
                MOVE "9" TO opcion
            END-IF.
@@ -484,10 +487,23 @@
                END-EVALUATE
            END-EVALUATE.
       
+      
       *-----------------------------------------------------------------
-       
+      *Genera un mensaje con el transcurso de la partida en la cabecera. 
+       9200-GENERAR-MENSAJE.
+           EVALUATE WS-PUNTAJE
+           WHEN 11
+               MOVE '  CORRE!  ' TO WS-H-MENSAJE
+           WHEN 30
+               MOVE 'SIGUE ASI!' TO WS-H-MENSAJE
+           WHEN 60
+               MOVE ' YA CASI!' TO WS-H-MENSAJE
+           WHEN OTHER
+               MOVE ALL '*' TO WS-H-MENSAJE
+           END-EVALUATE.
+      *-----------------------------------------------------------------
        9999-GAME-OVER.
-           IF WS-PUNTAJE >= 150 THEN
+           IF WS-PUNTAJE >= 100 THEN
                MOVE "Ha ganado" TO WS-GO-MENSAJE
            ELSE
                MOVE "Ha perdido" TO WS-GO-MENSAJE
