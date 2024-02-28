@@ -172,10 +172,9 @@
                WHEN OTHER
                    PERFORM 8000-CAMBIO-POS-ENEMY
                    PERFORM 6000-DEJAR-PERSONAJE-QUIETO
-
                END-EVALUATE
            END-PERFORM
-           PERFORM 9999-GAME-OVER.
+           PERFORM 10100-GAME-OVER.
 
       */////////////////////////////////////////////////////////////////
 
@@ -358,7 +357,7 @@
 
        6000-DEJAR-PERSONAJE-QUIETO.
            PERFORM 2000-MOSTRAR-MAPA
-           IF opcion not equal "9" 
+           IF opcion not equal "9"
                PERFORM 3000-RECIBIR-MOVIMIENTO
            END-IF.
 
@@ -367,14 +366,14 @@
       *CADA MOVIMIENTO. CUANDO LLEGUE A SCORE: 10 APARECERA EL ENEMIGO.
 
        7000-VERIFICAR-SCORE.
-           PERFORM 9200-GENERAR-MENSAJE
+           PERFORM 10000-GENERAR-MENSAJE
            IF WS-PUNTAJE = 10 THEN
               MOVE 78 TO ENEMY-EJEx
               MOVE 29 TO ENEMY-EJEy
               MOVE "E" TO MAT-IND(ENEMY-EJEy,ENEMY-EJEx)
            END-IF
            IF WS-PUNTAJE >= 100 THEN
-               PERFORM 9999-GAME-OVER
+               PERFORM 10100-GAME-OVER
            END-IF.
 
       *-----------------------------------------------------------------
@@ -455,7 +454,7 @@
            END-IF.
 
       *-----------------------------------------------------------------
-       
+
        9100-NO-TRANSPASAR-PUERTA.
            EVALUATE ENEMY-EJEy
            WHEN 5
@@ -478,7 +477,7 @@
                END-EVALUATE
            WHEN 25
                EVALUATE ENEMY-EJEx
-               WHEN 10  
+               WHEN 10
                   COMPUTE ENEMY-EJEx = ENEMY-EJEx + 1
                   MOVE "]" TO MAT-IND(25,10)
                WHEN 40
@@ -486,11 +485,11 @@
                   MOVE "[" TO MAT-IND(25,40)
                END-EVALUATE
            END-EVALUATE.
-      
-      
+
+
       *-----------------------------------------------------------------
-      *Genera un mensaje con el transcurso de la partida en la cabecera. 
-       9200-GENERAR-MENSAJE.
+      *Genera un mensaje con el transcurso de la partida en la cabecera.
+       10000-GENERAR-MENSAJE.
            EVALUATE WS-PUNTAJE
            WHEN 11
                MOVE '  CORRE!  ' TO WS-H-MENSAJE
@@ -501,8 +500,10 @@
            WHEN OTHER
                MOVE ALL '*' TO WS-H-MENSAJE
            END-EVALUATE.
+
       *-----------------------------------------------------------------
-       9999-GAME-OVER.
+
+       10100-GAME-OVER.
            IF WS-PUNTAJE >= 100 THEN
                MOVE "Ha ganado" TO WS-GO-MENSAJE
            ELSE
