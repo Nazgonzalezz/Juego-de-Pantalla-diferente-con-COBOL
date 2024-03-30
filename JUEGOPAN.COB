@@ -111,14 +111,8 @@
                            PERFORM 3000-RECIBIR-MOVIMIENTO
                        END-IF
                    ELSE
-                       MOVE 1 TO EJEx
-                       PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
-                       PERFORM 5000-TRASPASAR-PUERTA
                        PERFORM 8000-CAMBIO-POS-ENEMY
-                       PERFORM 2000-MOSTRAR-MAPA
-                       IF opcion not equal "9"
-                           PERFORM 3000-RECIBIR-MOVIMIENTO
-                       END-IF
+                       PERFORM 6000-DEJAR-PERSONAJE-QUIETO
                   END-IF
                WHEN "A"
                    IF EJEX NOT EQUAL 1
@@ -131,14 +125,8 @@
                            PERFORM 3000-RECIBIR-MOVIMIENTO
                        END-IF
                    ELSE
-                       MOVE 80 TO EJEx
-                       PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
-                       PERFORM 5000-TRASPASAR-PUERTA
                        PERFORM 8000-CAMBIO-POS-ENEMY
-                       PERFORM 2000-MOSTRAR-MAPA
-                       IF opcion not equal "9"
-                           PERFORM 3000-RECIBIR-MOVIMIENTO
-                       END-IF
+                       PERFORM 6000-DEJAR-PERSONAJE-QUIETO
                    END-IF
                WHEN "W"
                    IF EJEy NOT EQUAL 2
@@ -174,7 +162,7 @@
                    PERFORM 6000-DEJAR-PERSONAJE-QUIETO
                END-EVALUATE
            END-PERFORM
-           PERFORM 10100-GAME-OVER.
+           PERFORM 11000-GAME-OVER.
 
       */////////////////////////////////////////////////////////////////
 
@@ -349,7 +337,7 @@
                        MOVE 26 TO EJEy
                        PERFORM 4000-MOVIMIENTO-DE-PERSONAJE
                    END-EVALUATE
-                   MOVE "[" TO MAT-IND(25,40)
+                   MOVE "[" TO MAT-IND(25,41)
                END-EVALUATE
            END-EVALUATE.
 
@@ -367,20 +355,20 @@
 
        7000-VERIFICAR-SCORE.
            PERFORM 10000-GENERAR-MENSAJE
-           IF WS-PUNTAJE = 10 THEN
+           IF WS-PUNTAJE = 5 THEN
               MOVE 78 TO ENEMY-EJEx
               MOVE 29 TO ENEMY-EJEy
               MOVE "E" TO MAT-IND(ENEMY-EJEy,ENEMY-EJEx)
            END-IF
            IF WS-PUNTAJE >= 100 THEN
-               PERFORM 10100-GAME-OVER
+               PERFORM 11000-GAME-OVER
            END-IF.
 
       *-----------------------------------------------------------------
       *AQUI REALIZAMOS EL MOVIMIENTO VISUAL DEL ENEMIGO.
 
        8000-CAMBIO-POS-ENEMY.
-           IF WS-PUNTAJE > 10 THEN
+           IF WS-PUNTAJE > 5 THEN
               MOVE ENEMY-EJEx TO ENEMY-VIEJOEJEx
               MOVE ENEMY-EJEy TO ENEMY-VIEJOEJEy
               PERFORM 9000-MOVIMIENTO-ENEMIGO
@@ -489,13 +477,14 @@
 
       *-----------------------------------------------------------------
       *Genera un mensaje con el transcurso de la partida en la cabecera.
+       
        10000-GENERAR-MENSAJE.
-           EVALUATE WS-PUNTAJE
-           WHEN 11
+           EVALUATE TRUE
+           WHEN WS-PUNTAJE = 11 or WS-PUNTAJE = 6 or WS-PUNTAJE = 35
                MOVE '  CORRE!  ' TO WS-H-MENSAJE
-           WHEN 30
+           WHEN WS-PUNTAJE = 30 or WS-PUNTAJE = 40 or WS-PUNTAJE = 15
                MOVE 'SIGUE ASI!' TO WS-H-MENSAJE
-           WHEN 60
+           WHEN WS-PUNTAJE = 60 or WS-PUNTAJE = 55 or WS-PUNTAJE = 80
                MOVE ' YA CASI!' TO WS-H-MENSAJE
            WHEN OTHER
                MOVE ALL '*' TO WS-H-MENSAJE
@@ -503,7 +492,7 @@
 
       *-----------------------------------------------------------------
 
-       10100-GAME-OVER.
+       11000-GAME-OVER.
            IF WS-PUNTAJE >= 100 THEN
                MOVE "Ha ganado" TO WS-GO-MENSAJE
            ELSE
